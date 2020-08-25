@@ -21,6 +21,8 @@
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Core.h" />
+    <ClInclude Include="src\Engine.h" />
+    <ClInclude Include="src\EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />

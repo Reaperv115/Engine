@@ -11,5 +11,7 @@ namespace Engine
 
 		void Run();
 	};
+
+	Application* CreateApplication();
 }
 
