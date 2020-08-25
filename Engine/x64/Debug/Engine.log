@@ -1,0 +1,4 @@
+﻿E:\Visual Studio 2019\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(491,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (testengine.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  test.cpp
+     Creating library C:\Users\rjs57\Desktop\testengine\x64\Debug\Engine.lib and object C:\Users\rjs57\Desktop\testengine\x64\Debug\Engine.exp
+  Engine.vcxproj -> C:\Users\rjs57\Desktop\testengine\x64\Debug\Engine.dll
