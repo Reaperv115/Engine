@@ -1,6 +1,5 @@
 #pragma once
 #include <GLFW/glfw3.h>
-#include "Engine.h"
 
 
 #ifdef EG_PLATFORM_WINDOWS
