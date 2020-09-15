@@ -9,7 +9,9 @@ namespace Engine
 		Application();
 		~Application();
 
-		void Run();
+		int Run();
 	};
+
+	Application* CreateApplication();
 }
 
