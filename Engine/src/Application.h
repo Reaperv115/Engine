@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.h"
+#include "Utilities\ErrorLogger.h"
 
 namespace Engine
 {
@@ -10,6 +11,9 @@ namespace Engine
 		~Application();
 
 		int Run();
+
+	public:
+		ErrorLogger errorLogger;
 	};
 
 	Application* CreateApplication();

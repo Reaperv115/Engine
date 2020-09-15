@@ -19,12 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Utilities\ErrorLogger.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Core.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Utilities\ErrorLogger.cpp" />
     <ClCompile Include="src\Application.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

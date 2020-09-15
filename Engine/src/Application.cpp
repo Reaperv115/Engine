@@ -29,6 +29,7 @@ namespace Engine
             glfwTerminate();
             return -1;
         }
+        errorLogger.Log("GLFW window successfully crteated");
 
         /* Make the window's context current */
         glfwMakeContextCurrent(window);
