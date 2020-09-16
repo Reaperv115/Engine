@@ -1,6 +1,7 @@
 #pragma once
 #include "Core.h"
 #include "Utilities\ErrorLogger.h"
+#include <iostream>
 
 namespace Engine
 {
@@ -9,6 +10,9 @@ namespace Engine
 	public:
 		Application();
 		~Application();
+
+		static int createShader(const std::string& vertexShader, const std::string& pixelShader);
+		static unsigned int compileShader(unsigned int type, const std::string& source);
 
 		int Run();
 
