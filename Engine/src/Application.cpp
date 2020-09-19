@@ -1,5 +1,5 @@
 #include "Application.h"
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 namespace Engine
@@ -77,9 +77,7 @@ namespace Engine
 
         /* Make the window's context current */
         glfwMakeContextCurrent(window);
-
-        if (glewInit() != GLEW_OK)
-            std::cout << "Error" << std::endl;
+        int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
         float positions[6] =
         {
