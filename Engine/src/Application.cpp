@@ -1,6 +1,7 @@
 #include "Application.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <direct.h>
 
 namespace Engine
 {
@@ -56,6 +57,38 @@ namespace Engine
         return id;
     }
 
+    ShaderProgramSource Application::parseShader(const std::string& filepath)
+    {
+        std::ifstream stream(filepath);
+
+        enum class ShaderType
+        {
+            NONE = -1, VERTEX = 0, PIXEL = 1
+        };
+
+        std::string line;
+        std::stringstream ss[2];
+        ShaderType type = ShaderType::NONE;
+
+        while(getline(stream, line))
+        {
+            if (line.find("#shader") != std::string::npos)
+            {
+                if (line.find("vertex") != std::string::npos)
+                    type = ShaderType::VERTEX;
+                else if (line.find("pixel") != std::string::npos)
+                    type = ShaderType::PIXEL;
+
+            }
+            else
+            {
+                ss[(int)type] << line << '/n';
+            }
+        }
+
+        return { ss[0].str(), ss[1].str() };
+    }
+
 	int Application::Run()
 	{
 		/*while (true);*/
@@ -106,26 +139,16 @@ namespace Engine
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 
-        std::string vertexShader = R"(
-                #version 330 core
-                layout(location = 0) in vec4 position;
-                void main()
-                {
-                    gl_Position = position;
-                }
-        )";
+        /*char directorybuffer[256];
+        char* val = getcwd(directorybuffer, sizeof(directorybuffer));
+        std::cout << val << std::endl;*/
 
-        std::string pixelShader = R"(
-                #version 330 core
-                layout(location = 0) out vec4 color;
-                void main()
-                {
-                    color = vec4(1.0, 0.0, 0.0, 1.0);
-                }
-        )";
+        ShaderProgramSource source = parseShader("../Engine/src/res/shaders/Basic.glsl");
+        std::cout << source.VertexSource << std::endl;
+        std::cout << source.PixelSource << std::endl;
 
-        unsigned int shader = createShader(vertexShader, pixelShader);
-        glUseProgram(shader);
+        /*unsigned int shader = createShader(vertexShader, pixelShader);
+        glUseProgram(shader);*/
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
@@ -142,6 +165,7 @@ namespace Engine
             /* Poll for and process events */
             glfwPollEvents();
         }
+        //glDeleteProgram(source);
 
         glfwTerminate();
         return 1;
