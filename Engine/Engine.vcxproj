@@ -142,6 +142,7 @@
     <ClInclude Include="src\Core.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\EntryPoint.h" />
+    <ClInclude Include="src\res\shaders\Shaders.h" />
     <ClInclude Include="src\Utilities\ErrorLogger.h" />
   </ItemGroup>
   <ItemGroup>
@@ -155,9 +156,6 @@
     <ProjectReference Include="Helper_Libraries\Glad\Glad.vcxproj">
       <Project>{BDD6857C-A90D-870D-52FA-6C103E10030F}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\res\shaders\Basic.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

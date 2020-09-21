@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <Windows.h>
+#include "res/shaders/Shaders.h"
 
 namespace Engine
 {
@@ -22,12 +23,12 @@ namespace Engine
 
 		static int createShader(const std::string& vertexShader, const std::string& pixelShader);
 		static unsigned int compileShader(unsigned int type, const std::string& source);
-		static ShaderProgramSource parseShader(const std::string& filepath);
 
 		int Run();
 
 	public:
 		ErrorLogger errorLogger;
+		Shaders shaders;
 	};
 
 	Application* CreateApplication();
