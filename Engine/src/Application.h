@@ -6,6 +6,12 @@
 
 namespace Engine
 {
+	struct ShaderProgramSource
+	{
+		std::string VertexSource;
+		std::string PixelSource;
+	};
+
 	class ENGINE_API Application
 	{
 	public:
@@ -19,6 +25,7 @@ namespace Engine
 
 	public:
 		ErrorLogger errorLogger;
+		Shaders shaders;
 	};
 
 	Application* CreateApplication();

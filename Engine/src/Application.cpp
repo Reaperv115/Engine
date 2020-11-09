@@ -2,6 +2,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+
 namespace Engine
 {
 	Application::Application()
@@ -56,6 +57,7 @@ namespace Engine
         return id;
     }
 
+
 	int Application::Run()
 	{
 		/*while (true);*/
@@ -77,6 +79,8 @@ namespace Engine
 
         /* Make the window's context current */
         glfwMakeContextCurrent(window);
+        glfwSwapInterval(1);
+
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
         float positions[] =
@@ -96,7 +100,7 @@ namespace Engine
         unsigned int buffer;
         glGenBuffers(1, &buffer);
         glBindBuffer(GL_ARRAY_BUFFER, buffer);
-        glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), positions, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), positions, GL_STATIC_DRAW);
 
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
@@ -106,36 +110,34 @@ namespace Engine
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 
-        std::string vertexShader = R"(
-                #version 330 core
-                layout(location = 0) in vec4 position;
-                void main()
-                {
-                    gl_Position = position;
-                }
-        )";
 
-        std::string pixelShader = R"(
-                #version 330 core
-                layout(location = 0) out vec4 color;
-                void main()
-                {
-                    color = vec4(1.0, 0.0, 0.0, 1.0);
-                }
-        )";
-
-        Shaders shaders;
         unsigned int shader = createShader(shaders.vertexShader, shaders.pixelShader);
         glUseProgram(shader);
+
+        int location = glGetUniformLocation(shader, "u_Color");
+        glUniform4f(location, 0.4f, 0.0f, 0.0f, 1.0f);
+
+        float r = 0.0f;
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
+            if (r > 1.0f)
+            {
+                r = 0.0f;
+            }
+            else
+            {
+                r += 0.01f;
+            }
 
             /* Render here */
             glClear(GL_COLOR_BUFFER_BIT);
 
+            glUniform4f(location, r, 0.0f, 0.0f, 1.0f);
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+
+            
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
@@ -143,6 +145,7 @@ namespace Engine
             /* Poll for and process events */
             glfwPollEvents();
         }
+        glDeleteProgram(shader);
 
         glfwTerminate();
         return 1;
