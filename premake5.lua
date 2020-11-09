@@ -13,6 +13,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Engine/Helper_Libraries/GLFW/include"
 IncludeDir["Glad"] = "Engine/Helper_Libraries/Glad/include"
+IncludeDir["glm"] = "Engine/Helper_Libraries/glm"
 
 include "Engine/Helper_Libraries/GLFW"
 include "Engine/Helper_Libraries/Glad"
@@ -25,17 +26,23 @@ project "Engine"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "EGPCH.h"
+	pchsource "Engine/src/EGPCH.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/Helper_Libraries/glm/**.hpp",
+		"%{prj.name}/Helper_Libraries/glm/**.inl"
 	}
 
 	includedirs
 	{
 		"%{prj.name}/src",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.Glad}"
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -90,7 +97,8 @@ project "App"
 
 	includedirs
 	{
-		"Engine/src"
+		"Engine/src",
+		"%{IncludeDir.glm}"
 	}
 
 	links

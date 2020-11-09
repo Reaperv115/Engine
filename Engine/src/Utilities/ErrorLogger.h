@@ -1,6 +1,5 @@
+#include "EGPCH.h"
 #pragma once
-#include <string>
-#include <Windows.h>
 
 namespace Engine
 {
