@@ -13,6 +13,7 @@
     <ClInclude Include="src\Utilities\ErrorLogger.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="src\res\shaders\Shaders.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />

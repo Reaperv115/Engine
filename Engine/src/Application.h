@@ -1,7 +1,8 @@
 #pragma once
 #include "Core.h"
-#include "Utilities\ErrorLogger.h"
+#include "Utilities/ErrorLogger.h"
 #include <iostream>
+#include "res/shaders/Shaders.h"
 
 namespace Engine
 {

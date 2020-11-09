@@ -124,7 +124,8 @@ namespace Engine
                 }
         )";
 
-        unsigned int shader = createShader(vertexShader, pixelShader);
+        Shaders shaders;
+        unsigned int shader = createShader(shaders.vertexShader, shaders.pixelShader);
         glUseProgram(shader);
 
         /* Loop until the user closes the window */
