@@ -1278,6 +1278,7 @@
     <ClInclude Include="src\res\shaders\Shaders.h">
       <Filter>src\res\shaders</Filter>
     </ClInclude>
+    <ClInclude Include="src\Renderer\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -1289,5 +1290,6 @@
     <ClCompile Include="src\Utilities\ErrorLogger.cpp">
       <Filter>src\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="src\Renderer\Camera.cpp" />
   </ItemGroup>
 </Project>

@@ -1,16 +1,11 @@
-#include "EGPCH.h"
 #pragma once
 #include "Core.h"
 #include "Utilities/ErrorLogger.h"
 #include "res/shaders/Shaders.h"
+#include "Renderer\Camera.h"
 
 namespace Engine
 {
-	struct ShaderProgramSource
-	{
-		std::string VertexSource;
-		std::string PixelSource;
-	};
 
 	class ENGINE_API Application
 	{
@@ -26,6 +21,7 @@ namespace Engine
 	public:
 		ErrorLogger errorLogger;
 		Shaders shaders;
+		Camera camera;
 	};
 
 	Application* CreateApplication();

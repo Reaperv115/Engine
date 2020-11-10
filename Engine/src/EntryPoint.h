@@ -1,4 +1,5 @@
 #pragma once
+#include "EGPCH.h"
 
 #ifdef EG_PLATFORM_WINDOWS
 

@@ -1,3 +1,4 @@
+#include "EGPCH.h"
 #include "ErrorLogger.h"
 
 namespace Engine
@@ -7,7 +8,7 @@ namespace Engine
 
 	}
 
-	void ErrorLogger::Log(std::string message)
+	void ErrorLogger::Log(std::string& message)
 	{
 		std::string errorMessage = "Error: " + message;
 		MessageBoxA(NULL, errorMessage.c_str(), "Error", MB_ICONERROR);

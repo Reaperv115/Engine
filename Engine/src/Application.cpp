@@ -1,3 +1,4 @@
+#include "EGPCH.h"
 #include "Application.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -113,6 +114,16 @@ namespace Engine
 
         unsigned int shader = createShader(shaders.vertexShader, shaders.pixelShader);
         glUseProgram(shader);
+
+        camera.projMat = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+        camera.viewMat = glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, 0.0f, 0.0f));
+        camera.worldMat = glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.0f));
+
+        glm::mat4 wvp = camera.projMat * camera.viewMat * camera.worldMat;
+
+        int matricesLocation = glGetUniformLocation(shader, "WVP");
+        glUniformMatrix4fv(matricesLocation, 1, GL_FALSE, &wvp[0][0]);
+        
 
         int location = glGetUniformLocation(shader, "u_Color");
         glUniform4f(location, 0.4f, 0.0f, 0.0f, 1.0f);

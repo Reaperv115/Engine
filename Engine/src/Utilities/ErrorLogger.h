@@ -1,5 +1,5 @@
-#include "EGPCH.h"
 #pragma once
+#include "EGPCH.h"
 
 namespace Engine
 {
@@ -7,7 +7,7 @@ namespace Engine
 	{
 	public:
 		ErrorLogger();
-		void Log(std::string message);
+		void Log(std::string& message);
 	};
 }
 

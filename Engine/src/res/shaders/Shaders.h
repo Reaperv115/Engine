@@ -1,5 +1,5 @@
-#include "EGPCH.h"
 #pragma once
+#include "EGPCH.h"
 
 namespace Engine
 {
@@ -13,9 +13,11 @@ namespace Engine
 
         layout(location = 0) in vec4 position;
 
+        uniform mat4 WVP;
+
         void main()
         {
-            gl_Position = position;
+            gl_Position = WVP * position;
         }
         )";
         std::string pixelShader = R"(

@@ -554,6 +554,7 @@
     <ClInclude Include="src\EGPCH.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\EntryPoint.h" />
+    <ClInclude Include="src\Renderer\Camera.h" />
     <ClInclude Include="src\Utilities\ErrorLogger.h" />
     <ClInclude Include="src\res\shaders\Shaders.h" />
   </ItemGroup>
@@ -562,6 +563,7 @@
     <ClCompile Include="src\EGPCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Renderer\Camera.cpp" />
     <ClCompile Include="src\Utilities\ErrorLogger.cpp" />
   </ItemGroup>
   <ItemGroup>
