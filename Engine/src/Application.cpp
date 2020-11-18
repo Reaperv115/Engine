@@ -115,9 +115,7 @@ namespace Engine
         unsigned int shader = createShader(shaders.vertexShader, shaders.pixelShader);
         glUseProgram(shader);
 
-        camera.projMat = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
-        camera.viewMat = glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, 0.0f, 0.0f));
-        camera.worldMat = glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.0f));
+        
 
         glm::mat4 wvp = camera.projMat * camera.viewMat * camera.worldMat;
 
@@ -133,22 +131,19 @@ namespace Engine
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
-            if (r > 1.0f)
-            {
-                r = 0.0f;
-            }
-            else
-            {
-                r += 0.01f;
-            }
+
 
             /* Render here */
             glClear(GL_COLOR_BUFFER_BIT);
+            camera.Move();
+            wvp = camera.projMat * camera.viewMat * camera.worldMat;
 
-            glUniform4f(location, r, 0.0f, 0.0f, 1.0f);
+            glUniform4f(location, 1.0f, 0.0f, 0.0f, 1.0f);
+            glUniformMatrix4fv(matricesLocation, 1, GL_FALSE, &wvp[0][0]);
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
             
+
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
