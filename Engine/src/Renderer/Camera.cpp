@@ -6,10 +6,12 @@ namespace Engine
 {
 	Camera::Camera()
 	{
-		//projMat = glm::perspectiveFovLH(glm::degrees(90.0f), 900.0f, 600.0f, 0.1f, 100.0f);
-		projMat = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
-		viewMat = glm::lookAtLH(cameraPos, cameraTarg, defaultupVector);
-		worldMat = glm::mat4(1.0f);
+		//projMat = glm::orthoLH(600, 2000, 1000, 400, 1, 100);
+		this->updateCamera();
+		this->cameraPosition = glm::vec3(0.0f, 0.0f, 10.0f);
+		this->projMat = glm::perspectiveFov(glm::radians(45.0f), 640.0f, 480.0f, 0.1f, 1000.0f);
+		this->viewMat = glm::lookAt(cameraPosition, this->cameraFront, cameraUp);
+		this->worldMat = glm::mat4(1.0f);
 		//worldMat = glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.0f));
 	}
 
@@ -17,15 +19,34 @@ namespace Engine
 	{
 		if (GetAsyncKeyState('W'))
 		{
-			cameraPos.z += 0.005f;
-			cameraTarg.z += cameraPos.z;
-			viewMat = glm::lookAtLH(cameraPos, cameraTarg, defaultupVector);
+			this->cameraPosition += this->cameraFront * this->movementSpeed;
+			this->updateCamera();
+			this->viewMat = glm::lookAt(this->cameraPosition, this->cameraPosition + this->cameraFront, this->cameraUp);
 		}
 		if (GetAsyncKeyState('S'))
 		{
-			cameraPos.z -= 0.005f;
-			cameraTarg.z -= cameraPos.z;
-			viewMat = glm::lookAtLH(cameraPos, cameraTarg, defaultupVector);
+			this->cameraPosition -= this->cameraFront * this->movementSpeed;
+			this->updateCamera();
+			this->viewMat = glm::lookAt(this->cameraPosition, this->cameraPosition + this->cameraFront, this->cameraUp);
 		}
+		if (GetAsyncKeyState('A'))
+		{
+			this->cameraPosition -= this->cameraRight * this->movementSpeed;
+			this->updateCamera();
+			this->viewMat = glm::lookAt(this->cameraPosition, this->cameraPosition + this->cameraFront, this->cameraUp);
+		}
+		if (GetAsyncKeyState('D'))
+		{
+			this->cameraPosition += this->cameraRight * this->movementSpeed;
+			this->updateCamera();
+			this->viewMat = glm::lookAt(this->cameraPosition, this->cameraPosition + this->cameraFront, this->cameraUp);
+		}
+	}
+
+	void Camera::updateCamera()
+	{
+		this->cameraFront = glm::normalize(glm::cross(this->defaultupVector, this->defaultrightVector));
+		this->cameraRight = glm::normalize(glm::cross(this->cameraFront, this->defaultupVector));
+		this->cameraUp = glm::normalize(glm::cross(this->cameraRight, this->cameraFront));
 	}
 }

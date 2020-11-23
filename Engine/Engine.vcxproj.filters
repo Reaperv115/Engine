@@ -1292,4 +1292,8 @@
     </ClCompile>
     <ClCompile Include="src\Renderer\Camera.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\res\shaders\Vertex.glsl" />
+    <None Include="src\res\shaders\Pixel.glsl" />
+  </ItemGroup>
 </Project>

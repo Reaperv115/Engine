@@ -71,7 +71,7 @@ namespace Engine
         
 
         /* Create a windowed mode window and its OpenGL context */
-        window = glfwCreateWindow(640, 480, "Engine", NULL, NULL);
+        window = glfwCreateWindow(900, 600, "Engine", NULL, NULL);
         if (!window)
         {
             glfwTerminate();
@@ -82,14 +82,16 @@ namespace Engine
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
 
+        /*glEnable(GL_DEPTH_TEST);
+        glFrontFace(GL_CCW);*/
+
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
         float positions[] =
         {
-           -0.5f, -0.5f, // 0
-            0.5f, -0.5f, // 1
-            0.5f,  0.5f, // 2
-           -0.5f,  0.5f  // 3
+           -0.5f, -0.5f, 1.0f, // 0
+            0.5f, -0.5f, 1.0f, // 1
+            0.0f,  0.5f, 1.0f, // 2
         };
 
         unsigned int indices[] =
@@ -101,7 +103,7 @@ namespace Engine
         unsigned int buffer;
         glGenBuffers(1, &buffer);
         glBindBuffer(GL_ARRAY_BUFFER, buffer);
-        glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), positions, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, 3 * 3 * sizeof(float), positions, GL_DYNAMIC_DRAW);
 
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
@@ -109,7 +111,7 @@ namespace Engine
         unsigned int ibo;
         glGenBuffers(1, &ibo);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_DYNAMIC_DRAW);
 
 
         unsigned int shader = createShader(shaders.vertexShader, shaders.pixelShader);

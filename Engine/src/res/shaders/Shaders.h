@@ -11,13 +11,13 @@ namespace Engine
         std::string vertexShader = R"(
         #version 330 core
 
-        layout(location = 0) in vec4 position;
+        layout(location = 0) in vec3 position;
 
         uniform mat4 WVP;
 
         void main()
         {
-            gl_Position = WVP * position;
+            gl_Position =  WVP * vec4(position, 1.0);
         }
         )";
         std::string pixelShader = R"(

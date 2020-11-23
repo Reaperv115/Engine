@@ -10,6 +10,8 @@ namespace Engine
 		Camera();
 
 		void Move();
+	public:
+		void updateCamera();
 
 	public:
 		//matrices
@@ -23,17 +25,19 @@ namespace Engine
 		glm::vec3 defaultleftVector = glm::vec3(-1.0f, 0.0f, 0.0f);
 		glm::vec3 defaultupVector = glm::vec3(0.0f, 1.0f, 0.0f);
 
-		glm::vec3 forwardVec;
-		glm::vec3 rightVec;
-		glm::vec3 backVec;
-		glm::vec3 leftVec;
+		glm::vec3 cameraPosition;
+		glm::vec3 cameraRotation;
+		glm::vec3 cameraTarget;
 
-		glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 0.0f);
-		glm::vec3 cameraRotation = glm::vec3(0.0f, 0.0f, 0.0f);
-		glm::vec3 cameraTarg = glm::vec3(1.0f, 1.0f, 1.0f);
-		glm::float32 position;
-		glm::float32 rotation;
+		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+		glm::vec3 cameraRight = glm::vec3(1.0f, 0.0f, 0.0f);
+		glm::vec3 cameraFront = glm::normalize(glm::cross(cameraUp, cameraRight));
 
+		float roll;
+		float pitch;
+		float yaw;
+
+		float movementSpeed = 0.3f;
 	};
 }
 
