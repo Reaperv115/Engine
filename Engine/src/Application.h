@@ -3,6 +3,7 @@
 #include "Utilities/ErrorLogger.h"
 #include "res/shaders/Shaders.h"
 #include "Renderer/Camera.h"
+#include "Utilities/VertexArray.h"
 
 namespace Engine
 {
@@ -13,9 +14,6 @@ namespace Engine
 		Application();
 		~Application();
 
-		static int createShader(const std::string& vertexShader, const std::string& pixelShader);
-		static unsigned int compileShader(unsigned int type, const std::string& source);
-
 		int Run();
 
 	public:
@@ -24,7 +22,7 @@ namespace Engine
 
 	public:
 		ErrorLogger errorLogger;
-		//Shaders shaders;
+		VertexArray vao;
 		Camera camera;
 	};
 

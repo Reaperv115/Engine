@@ -16,48 +16,6 @@ namespace Engine
 
 	}
 
-    int Application::createShader(const std::string& vertexShader, const std::string& pixelShader)
-    {
-        unsigned int program = glCreateProgram();
-        unsigned int vs = compileShader(GL_VERTEX_SHADER, vertexShader);
-        unsigned int ps = compileShader(GL_FRAGMENT_SHADER, pixelShader);
-
-        glAttachShader(program, vs);
-        glAttachShader(program, ps);
-        glLinkProgram(program);
-        glValidateProgram(program);
-
-        glDeleteShader(vs);
-        glDeleteShader(ps);
-
-        return program;
-    }
-
-    unsigned int Application::compileShader(unsigned int type, const std::string& source)
-    {
-        unsigned int id = glCreateShader(type);
-        const char* src = source.c_str();
-        glShaderSource(id, 1, &src, nullptr);
-        glCompileShader(id);
-
-        int result;
-        glGetShaderiv(id, GL_COMPILE_STATUS, &result);
-        if (result == GL_FALSE)
-        {
-            int length;
-            glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
-            char* message = (char*)_malloca(length * sizeof(char));
-            glGetShaderInfoLog(id, length, &length, message);
-            std::cout << "Failed to compile " << 
-                (type == GL_VERTEX_SHADER ? "vertex" : "pixel") << "shader" <<  std::endl;
-            std::cout << message << std::endl;
-            glDeleteShader(id);
-            return 0;
-        }
-
-        return id;
-    }
-
 
 	int Application::Run()
 	{
@@ -97,12 +55,15 @@ namespace Engine
         };
 
         unsigned int buffer;
-        glGenBuffers(1, &buffer);
+        float size = 3 * 2 * sizeof(float);
+        vao.createvertexBuffer(1, buffer, size, *positions);
+        vao.enablevertexArray(0, 2, sizeof(float) * 2, 0);
+        /*glGenBuffers(1, &buffer);
         glBindBuffer(GL_ARRAY_BUFFER, buffer);
         glBufferData(GL_ARRAY_BUFFER, 3 * 2 * sizeof(float), positions, GL_DYNAMIC_DRAW);
 
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);*/
 
         unsigned int ibo;
         glGenBuffers(1, &ibo);
