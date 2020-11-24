@@ -2,7 +2,7 @@
 #include "Core.h"
 #include "Utilities/ErrorLogger.h"
 #include "res/shaders/Shaders.h"
-#include "Renderer\Camera.h"
+#include "Renderer/Camera.h"
 
 namespace Engine
 {
@@ -24,7 +24,7 @@ namespace Engine
 
 	public:
 		ErrorLogger errorLogger;
-		Shaders shaders;
+		//Shaders shaders;
 		Camera camera;
 	};
 

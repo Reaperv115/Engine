@@ -1,36 +1,22 @@
 #pragma once
 #include "EGPCH.h"
+#include <../glm/glm.hpp>
 
 namespace Engine
 {
     class Shaders
     {
     public:
-        Shaders(){}
+        Shaders(const char* vertexPath, const char* pixelPath);
 
-        std::string vertexShader = R"(
-        #version 330 core
+    public:
+        unsigned int iD;
 
-        layout(location = 0) in vec3 position;
+    public:
+        void setmatrixUniform(const std::string& shadervariableName, glm::mat4& value);
+        void setFloat(const std::string& shadervariableName, float n1, float n2, float n3, float n4);
+        void Use();
 
-        uniform mat4 WVP;
-
-        void main()
-        {
-            gl_Position =  WVP * vec4(position, 1.0);
-        }
-        )";
-        std::string pixelShader = R"(
-        #version 330 core
-
-        layout(location = 0) out vec4 color;
-
-        uniform vec4 u_Color;
-
-        void main()
-        {
-            color = u_Color;
-        }
-	    )";
+        unsigned int getID();
     };
 }

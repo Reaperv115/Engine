@@ -564,6 +564,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Renderer\Camera.cpp" />
+    <ClCompile Include="src\res\shaders\Shaders.cpp" />
     <ClCompile Include="src\Utilities\ErrorLogger.cpp" />
   </ItemGroup>
   <ItemGroup>

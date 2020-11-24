@@ -1291,6 +1291,7 @@
       <Filter>src\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="src\Renderer\Camera.cpp" />
+    <ClCompile Include="src\res\shaders\Shaders.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\res\shaders\Vertex.glsl" />

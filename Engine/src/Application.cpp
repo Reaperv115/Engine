@@ -82,28 +82,24 @@ namespace Engine
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
 
-        /*glEnable(GL_DEPTH_TEST);
-        glFrontFace(GL_CCW);*/
-
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
         float positions[] =
         {
-           -0.5f, -0.5f, 1.0f, // 0
-            0.5f, -0.5f, 1.0f, // 1
-            0.0f,  0.5f, 1.0f, // 2
+           -0.5f, -0.5f, // 0
+            0.5f, -0.5f, // 1
+            0.0f,  0.5f, // 2
         };
 
         unsigned int indices[] =
         {
-            0, 1, 2,
-            2, 3, 0
+            0, 1, 2
         };
 
         unsigned int buffer;
         glGenBuffers(1, &buffer);
         glBindBuffer(GL_ARRAY_BUFFER, buffer);
-        glBufferData(GL_ARRAY_BUFFER, 3 * 3 * sizeof(float), positions, GL_DYNAMIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, 3 * 2 * sizeof(float), positions, GL_DYNAMIC_DRAW);
 
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
@@ -111,22 +107,17 @@ namespace Engine
         unsigned int ibo;
         glGenBuffers(1, &ibo);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_DYNAMIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * sizeof(unsigned int), indices, GL_DYNAMIC_DRAW);
 
-
-        unsigned int shader = createShader(shaders.vertexShader, shaders.pixelShader);
-        glUseProgram(shader);
-
-        
+        Shaders shaders("../Engine/src/res/shaders/Vertex.glsl", "../Engine/src/res/shaders/Pixel.glsl");
 
         glm::mat4 wvp = camera.projMat * camera.viewMat * camera.worldMat;
 
-        int matricesLocation = glGetUniformLocation(shader, "WVP");
-        glUniformMatrix4fv(matricesLocation, 1, GL_FALSE, &wvp[0][0]);
+        shaders.setmatrixUniform("WVP", wvp);
+        shaders.Use();
         
-
-        int location = glGetUniformLocation(shader, "u_Color");
-        glUniform4f(location, 0.4f, 0.0f, 0.0f, 1.0f);
+        shaders.setFloat("u_Color", 0.4f, 0.0f, 0.0f, 1.0f);
+        shaders.Use();
 
         float r = 0.0f;
 
@@ -140,9 +131,9 @@ namespace Engine
             camera.Move();
             wvp = camera.projMat * camera.viewMat * camera.worldMat;
 
-            glUniform4f(location, 1.0f, 0.0f, 0.0f, 1.0f);
-            glUniformMatrix4fv(matricesLocation, 1, GL_FALSE, &wvp[0][0]);
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+            shaders.setFloat("u_Color", 1.0f, 0.0f, 0.0f, 1.0f);
+            shaders.setmatrixUniform("WVP", wvp);
+            glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
             
 
@@ -153,7 +144,7 @@ namespace Engine
             /* Poll for and process events */
             glfwPollEvents();
         }
-        glDeleteProgram(shader);
+        glDeleteProgram(shaders.getID());
 
         glfwTerminate();
         return 1;
