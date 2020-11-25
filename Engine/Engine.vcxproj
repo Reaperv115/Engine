@@ -549,6 +549,7 @@
     <ClInclude Include="Helper_Libraries\glm\vec3.hpp" />
     <ClInclude Include="Helper_Libraries\glm\vec4.hpp" />
     <ClInclude Include="Helper_Libraries\glm\vector_relational.hpp" />
+    <ClInclude Include="src\Utilities\IndexBuffer.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Core.h" />
     <ClInclude Include="src\EGPCH.h" />
@@ -560,6 +561,7 @@
     <ClInclude Include="src\Utilities\VertexArray.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Utilities\IndexBuffer.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\EGPCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

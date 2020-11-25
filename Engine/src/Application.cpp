@@ -65,10 +65,12 @@ namespace Engine
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);*/
 
-        unsigned int ibo;
-        glGenBuffers(1, &ibo);
+        unsigned int ib = 0;
+        float indexSize = 3 * sizeof(unsigned int);
+        ibo.generateBuffer(1, ib, indexSize, *indices);
+        /*glGenBuffers(1, &ibo);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * sizeof(unsigned int), indices, GL_DYNAMIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * sizeof(unsigned int), indices, GL_DYNAMIC_DRAW);*/
 
         Shaders shaders("../Engine/src/res/shaders/Vertex.glsl", "../Engine/src/res/shaders/Pixel.glsl");
 
