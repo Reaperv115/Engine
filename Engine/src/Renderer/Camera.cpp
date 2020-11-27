@@ -1,18 +1,18 @@
 #include "EGPCH.h"
 #include "Camera.h"
+#include <GLFW/glfw3.h>
 
 
 namespace Engine
 {
 	Camera::Camera()
 	{
-		//projMat = glm::orthoLH(600, 2000, 1000, 400, 1, 100);
+		this->firstMouse = true;
 		this->updateCamera();
 		this->cameraPosition = glm::vec3(0.0f, 0.0f, 10.0f);
 		this->projMat = glm::perspectiveFov(glm::radians(45.0f), 640.0f, 480.0f, 0.1f, 1000.0f);
 		this->viewMat = glm::lookAt(cameraPosition, this->cameraFront, cameraUp);
 		this->worldMat = glm::mat4(1.0f);
-		//worldMat = glm::translate(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 0.0f));
 	}
 
 	void Camera::Move()
@@ -41,12 +41,50 @@ namespace Engine
 			this->updateCamera();
 			this->viewMat = glm::lookAt(this->cameraPosition, this->cameraPosition + this->cameraFront, this->cameraUp);
 		}
+
 	}
 
 	void Camera::updateCamera()
 	{
-		this->cameraFront = glm::normalize(glm::cross(this->defaultupVector, this->defaultrightVector));
+		this->cameraFront.x = cos(glm::radians(this->yaw)) * cos(glm::radians(this->pitch));
+		this->cameraFront.y = sin(glm::radians(this->pitch));
+		this->cameraFront.z = sin(glm::radians(this->yaw)) * cos(glm::radians(this->pitch));
+
+		this->cameraFront = glm::normalize(this->cameraFront);
+		//this->cameraFront = glm::normalize(glm::cross(this->defaultrightVector, this->defaultupVector));
 		this->cameraRight = glm::normalize(glm::cross(this->cameraFront, this->defaultupVector));
 		this->cameraUp = glm::normalize(glm::cross(this->cameraRight, this->cameraFront));
+	}
+
+	void Camera::getmouseInput()
+	{
+
+		if (this->firstMouse)
+		{
+			this->lastmouseX = this->mouseX;
+			this->lastmouseY = this->mouseY;
+			this->firstMouse = false;
+		}
+
+		this->mouseoffsetX = this->mouseX - this->lastmouseX;
+		this->mouseoffsetY = this->lastmouseY - this->mouseY;
+
+		this->lastmouseX = this->mouseX;
+		this->lastmouseY = this->mouseY;
+
+	}
+
+	void Camera::updatemouseInput(const double& offsetX, const double& offsetY)
+	{
+		this->pitch += static_cast<float>(offsetY) * this->movementSpeed;
+		this->yaw += static_cast<float>(offsetX) * this->movementSpeed;
+
+		if (this->pitch > 80.0f)
+			this->pitch = 80.0f;
+		else if (this->pitch < -80.0f)
+			this->pitch = -80.0f;
+
+		if (this->yaw > 360.0f || this->yaw < -360.0f)
+			this->yaw = 0.0f;
 	}
 }

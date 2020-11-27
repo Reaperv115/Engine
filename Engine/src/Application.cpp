@@ -1,7 +1,7 @@
 #include "EGPCH.h"
 #include "Application.h"
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 
 namespace Engine
@@ -19,8 +19,7 @@ namespace Engine
 
 	int Application::Run()
 	{
-		/*while (true);*/
-        GLFWwindow* window;
+        GLFWwindow* window = nullptr;
 
         /* Initialize the library */
         if (!glfwInit())
@@ -58,19 +57,10 @@ namespace Engine
         float size = 3 * 2 * sizeof(float);
         vao.createvertexBuffer(1, buffer, size, *positions);
         vao.enablevertexArray(0, 2, sizeof(float) * 2, 0);
-        /*glGenBuffers(1, &buffer);
-        glBindBuffer(GL_ARRAY_BUFFER, buffer);
-        glBufferData(GL_ARRAY_BUFFER, 3 * 2 * sizeof(float), positions, GL_DYNAMIC_DRAW);
-
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);*/
 
         unsigned int ib = 0;
         float indexSize = 3 * sizeof(unsigned int);
         ibo.generateBuffer(1, ib, indexSize, *indices);
-        /*glGenBuffers(1, &ibo);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * sizeof(unsigned int), indices, GL_DYNAMIC_DRAW);*/
 
         Shaders shaders("../Engine/src/res/shaders/Vertex.glsl", "../Engine/src/res/shaders/Pixel.glsl");
 
@@ -87,11 +77,12 @@ namespace Engine
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
-
-
             /* Render here */
             glClear(GL_COLOR_BUFFER_BIT);
             camera.Move();
+            camera.getmouseInput();
+            camera.updatemouseInput(camera.mouseoffsetX, camera.mouseoffsetY);
+            glfwGetCursorPos(window, &camera.mouseX, &camera.mouseY);
             wvp = camera.projMat * camera.viewMat * camera.worldMat;
 
             shaders.setFloat("u_Color", 1.0f, 0.0f, 0.0f, 1.0f);

@@ -10,6 +10,8 @@ namespace Engine
 		Camera();
 
 		void Move();
+		void getmouseInput();
+		void updatemouseInput(const double& offsetX, const double& offsetY);
 	public:
 		void updateCamera();
 
@@ -36,6 +38,10 @@ namespace Engine
 		float roll;
 		float pitch;
 		float yaw;
+
+		double mouseX, lastmouseX, mouseoffsetX;
+		double mouseY, lastmouseY, mouseoffsetY;
+		bool firstMouse;
 
 		float movementSpeed = 0.3f;
 	};

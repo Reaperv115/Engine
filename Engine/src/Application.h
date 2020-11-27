@@ -1,5 +1,6 @@
 #pragma once
 #include "Core.h"
+
 #include "Utilities/ErrorLogger.h"
 #include "res/shaders/Shaders.h"
 #include "Renderer/Camera.h"
@@ -20,6 +21,7 @@ namespace Engine
 	public:
 		float deltaTime = 0.0f;
 		float lastFrame = 0.0f;
+		
 
 	public:
 		ErrorLogger errorLogger;
