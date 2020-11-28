@@ -86,5 +86,7 @@ namespace Engine
 
 		if (this->yaw > 360.0f || this->yaw < -360.0f)
 			this->yaw = 0.0f;
+		updateCamera();
+		viewMat = glm::lookAt(this->cameraPosition, this->cameraPosition + this->cameraFront, this->cameraUp);
 	}
 }

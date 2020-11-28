@@ -80,9 +80,9 @@ namespace Engine
             /* Render here */
             glClear(GL_COLOR_BUFFER_BIT);
             camera.Move();
+            glfwGetCursorPos(window, &camera.mouseX, &camera.mouseY);
             camera.getmouseInput();
             camera.updatemouseInput(camera.mouseoffsetX, camera.mouseoffsetY);
-            glfwGetCursorPos(window, &camera.mouseX, &camera.mouseY);
             wvp = camera.projMat * camera.viewMat * camera.worldMat;
 
             shaders.setFloat("u_Color", 1.0f, 0.0f, 0.0f, 1.0f);
