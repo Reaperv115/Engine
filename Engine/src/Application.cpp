@@ -45,21 +45,23 @@ namespace Engine
         {
            -0.5f, -0.5f, // 0
             0.5f, -0.5f, // 1
-            0.0f,  0.5f, // 2
+            0.5f,  0.5f, // 2
+           -0.5f,  0.5f, // 3
         };
 
         unsigned int indices[] =
         {
-            0, 1, 2
+            0, 1, 2,
+            2, 3, 0
         };
 
         unsigned int buffer;
-        float size = 3 * 2 * sizeof(float);
+        float size = 4 * 2 * sizeof(float);
         vao.createvertexBuffer(1, buffer, size, *positions);
         vao.enablevertexArray(0, 2, sizeof(float) * 2, 0);
 
         unsigned int ib = 0;
-        float indexSize = 3 * sizeof(unsigned int);
+        float indexSize = 6 * sizeof(unsigned int);
         ibo.generateBuffer(1, ib, indexSize, *indices);
 
         Shaders shaders("../Engine/src/res/shaders/Vertex.glsl", "../Engine/src/res/shaders/Pixel.glsl");
@@ -87,7 +89,7 @@ namespace Engine
 
             shaders.setFloat("u_Color", 1.0f, 0.0f, 0.0f, 1.0f);
             shaders.setmatrixUniform("WVP", wvp);
-            glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
             
 

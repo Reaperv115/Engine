@@ -1,6 +1,7 @@
 #include "EGPCH.h"
 #include "Camera.h"
 #include <GLFW/glfw3.h>
+#include <glad\glad.h>
 
 
 namespace Engine
@@ -46,14 +47,18 @@ namespace Engine
 
 	void Camera::updateCamera()
 	{
+		// adjusting rotation
 		this->cameraFront.x = cos(glm::radians(this->yaw)) * cos(glm::radians(this->pitch));
 		this->cameraFront.y = sin(glm::radians(this->pitch));
 		this->cameraFront.z = sin(glm::radians(this->yaw)) * cos(glm::radians(this->pitch));
 
+		// creating and normalizing directional vectors
 		this->cameraFront = glm::normalize(this->cameraFront);
-		//this->cameraFront = glm::normalize(glm::cross(this->defaultrightVector, this->defaultupVector));
 		this->cameraRight = glm::normalize(glm::cross(this->cameraFront, this->defaultupVector));
 		this->cameraUp = glm::normalize(glm::cross(this->cameraRight, this->cameraFront));
+
+		// updating view matrix
+		this->viewMat = glm::lookAt(this->cameraPosition, this->cameraPosition + this->cameraFront, this->cameraUp);
 	}
 
 	void Camera::getmouseInput()
@@ -87,6 +92,5 @@ namespace Engine
 		if (this->yaw > 360.0f || this->yaw < -360.0f)
 			this->yaw = 0.0f;
 		updateCamera();
-		viewMat = glm::lookAt(this->cameraPosition, this->cameraPosition + this->cameraFront, this->cameraUp);
 	}
 }
