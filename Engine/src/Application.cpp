@@ -1,4 +1,4 @@
-#include "EGPCH.h"
+#include "PCH/EGPCH.h"
 #include "Application.h"
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -81,13 +81,24 @@ namespace Engine
         {
             /* Render here */
             glClear(GL_COLOR_BUFFER_BIT);
+
+            if (r < 1.0f)
+            {
+                r += 0.01f;
+            }
+            else
+            {
+                r = 0.03f;
+            }
             camera.Move();
-            glfwGetCursorPos(window, &camera.mouseX, &camera.mouseY);
-            camera.getmouseInput();
-            camera.updatemouseInput(camera.mouseoffsetX, camera.mouseoffsetY);
+            
+             glfwGetCursorPos(window, &camera.mouseX, &camera.mouseY);
+             camera.getmouseInput();
+             camera.updatemouseInput(camera.mouseoffsetX, camera.mouseoffsetY);
+            
             wvp = camera.projMat * camera.viewMat * camera.worldMat;
 
-            shaders.setFloat("u_Color", 1.0f, 0.0f, 0.0f, 1.0f);
+            shaders.setFloat("u_Color", r, 0.0f, 0.0f, 1.0f);
             shaders.setmatrixUniform("WVP", wvp);
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 

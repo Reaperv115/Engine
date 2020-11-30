@@ -1,5 +1,5 @@
 #pragma once
-#include "EGPCH.h"
+#include "PCH/EGPCH.h"
 #include <../glm/glm.hpp>
 
 namespace Engine

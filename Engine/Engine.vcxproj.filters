@@ -22,6 +22,15 @@
     <Filter Include="src">
       <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Objects">
+      <UniqueIdentifier>{E62683BA-52DC-FBAF-DBD0-F5864785F2B3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\PCH">
+      <UniqueIdentifier>{B79C2FA9-237C-AE44-2C94-391B98F214A6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Renderer">
+      <UniqueIdentifier>{73D1DFBF-5F34-6F64-08BA-A71AF4FB3AE7}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Utilities">
       <UniqueIdentifier>{D86B3A83-442C-B6B9-0D67-FF3679E6FA95}</UniqueIdentifier>
     </Filter>
@@ -1263,42 +1272,58 @@
     <ClInclude Include="src\Core.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\EGPCH.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\Engine.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\EntryPoint.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Objects\Mesh.h">
+      <Filter>src\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PCH\EGPCH.h">
+      <Filter>src\PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer\Camera.h">
+      <Filter>src\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Utilities\ErrorLogger.h">
+      <Filter>src\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utilities\IndexBuffer.h">
       <Filter>src\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="src\res\shaders\Shaders.h">
       <Filter>src\res\shaders</Filter>
     </ClInclude>
-    <ClInclude Include="src\Renderer\Camera.h" />
-    <ClInclude Include="src\Utilities\VertexArray.h" />
-    <ClInclude Include="src\Utilities\IndexBuffer.h" />
+    <ClInclude Include="src\Utilities\VertexBuffer.h">
+      <Filter>src\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\EGPCH.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\Objects\Mesh.cpp">
+      <Filter>src\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PCH\EGPCH.cpp">
+      <Filter>src\PCH</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer\Camera.cpp">
+      <Filter>src\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Utilities\ErrorLogger.cpp">
       <Filter>src\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\Camera.cpp" />
-    <ClCompile Include="src\res\shaders\Shaders.cpp" />
-    <ClCompile Include="src\Utilities\VertexArray.cpp" />
-    <ClCompile Include="src\Utilities\IndexBuffer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\res\shaders\Vertex.glsl" />
-    <None Include="src\res\shaders\Pixel.glsl" />
+    <ClCompile Include="src\Utilities\IndexBuffer.cpp">
+      <Filter>src\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\res\shaders\Shaders.cpp">
+      <Filter>src\res\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utilities\VertexBuffer.cpp">
+      <Filter>src\Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

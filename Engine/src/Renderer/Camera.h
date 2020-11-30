@@ -21,7 +21,7 @@ namespace Engine
 		glm::mat4 viewMat;
 		glm::mat4 worldMat;
 
-		// default deirectional vectors
+		// world deirectional vectors
 		glm::vec3 defaultforwardVector = glm::vec3(0.0f, 0.0f, 1.0f);
 		glm::vec3 defaultrightVector = glm::vec3(1.0f, 0.0f, 0.0f);
 		glm::vec3 defaultbackVector = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -37,9 +37,9 @@ namespace Engine
 		glm::vec3 cameraFront = glm::normalize(glm::cross(cameraUp, cameraRight));
 
 		// used for camera rotation
-		float roll;
-		float pitch;
-		float yaw;
+		float roll = 0.0f;
+		float pitch = 0.0f;
+		float yaw = 0.0f;
 		double mouseX, lastmouseX, mouseoffsetX;
 		double mouseY, lastmouseY, mouseoffsetY;
 		bool firstMouse;

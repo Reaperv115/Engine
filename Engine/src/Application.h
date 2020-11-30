@@ -1,10 +1,9 @@
 #pragma once
 #include "Core.h"
-
 #include "Utilities/ErrorLogger.h"
 #include "res/shaders/Shaders.h"
 #include "Renderer/Camera.h"
-#include "Utilities/VertexArray.h"
+#include "Utilities/VertexBuffer.h"
 #include "Utilities/IndexBuffer.h"
 
 namespace Engine
@@ -25,7 +24,7 @@ namespace Engine
 
 	public:
 		ErrorLogger errorLogger;
-		VertexArray vao;
+		VertexBuffer vao;
 		IndexBuffer ibo;
 		Camera camera;
 	};

@@ -1,4 +1,4 @@
-#include "EGPCH.h"
+#include "PCH/EGPCH.h"
 #include "Camera.h"
 #include <GLFW/glfw3.h>
 #include <glad\glad.h>
@@ -22,25 +22,21 @@ namespace Engine
 		{
 			this->cameraPosition += this->cameraFront * this->movementSpeed;
 			this->updateCamera();
-			this->viewMat = glm::lookAt(this->cameraPosition, this->cameraPosition + this->cameraFront, this->cameraUp);
 		}
 		if (GetAsyncKeyState('S'))
 		{
 			this->cameraPosition -= this->cameraFront * this->movementSpeed;
 			this->updateCamera();
-			this->viewMat = glm::lookAt(this->cameraPosition, this->cameraPosition + this->cameraFront, this->cameraUp);
 		}
 		if (GetAsyncKeyState('A'))
 		{
 			this->cameraPosition -= this->cameraRight * this->movementSpeed;
 			this->updateCamera();
-			this->viewMat = glm::lookAt(this->cameraPosition, this->cameraPosition + this->cameraFront, this->cameraUp);
 		}
 		if (GetAsyncKeyState('D'))
 		{
 			this->cameraPosition += this->cameraRight * this->movementSpeed;
 			this->updateCamera();
-			this->viewMat = glm::lookAt(this->cameraPosition, this->cameraPosition + this->cameraFront, this->cameraUp);
 		}
 
 	}

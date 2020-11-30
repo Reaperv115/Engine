@@ -26,8 +26,8 @@ project "Engine"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-	pchheader "EGPCH.h"
-	pchsource "Engine/src/EGPCH.cpp"
+	pchheader "PCH/EGPCH.h"
+	pchsource "Engine/src/PCH/EGPCH.cpp"
 
 	files
 	{

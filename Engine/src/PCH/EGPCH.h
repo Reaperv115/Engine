@@ -5,6 +5,7 @@
 #include <sstream>
 #include <memory>
 #include <algorithm>
+#include <vector>
 
 #ifdef EG_PLATFORM_WINDOWS
 	#include <Windows.h>
