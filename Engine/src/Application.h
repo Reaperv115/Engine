@@ -3,8 +3,7 @@
 #include "Utilities/ErrorLogger.h"
 #include "res/shaders/Shaders.h"
 #include "Renderer/Camera.h"
-#include "Utilities/VertexBuffer.h"
-#include "Utilities/IndexBuffer.h"
+#include "Objects\Mesh.h"
 
 namespace Engine
 {
@@ -24,8 +23,7 @@ namespace Engine
 
 	public:
 		ErrorLogger errorLogger;
-		VertexBuffer vao;
-		IndexBuffer ibo;
+		Mesh mesh;
 		Camera camera;
 	};
 

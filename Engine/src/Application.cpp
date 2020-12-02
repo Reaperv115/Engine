@@ -43,10 +43,10 @@ namespace Engine
 
         float positions[] =
         {
-           -0.5f, -0.5f, // 0
-            0.5f, -0.5f, // 1
-            0.5f,  0.5f, // 2
-           -0.5f,  0.5f, // 3
+           -1.5f, -1.5f, // 0
+            1.5f, -1.5f, // 1
+            1.5f,  1.5f, // 2
+           -1.5f,  1.5f, // 3
         };
 
         unsigned int indices[] =
@@ -55,14 +55,16 @@ namespace Engine
             2, 3, 0
         };
 
-        unsigned int buffer;
+        unsigned int buffer = 0;
         float size = 4 * 2 * sizeof(float);
-        vao.createvertexBuffer(1, buffer, size, *positions);
-        vao.enablevertexArray(0, 2, sizeof(float) * 2, 0);
+        mesh.initvertexbufferObject(buffer, size, *positions);
+        /*vao.createvertexBuffer(1, buffer, size, *positions);
+        vao.enablevertexArray(0, 2, sizeof(float) * 2, 0);*/
 
         unsigned int ib = 0;
         float indexSize = 6 * sizeof(unsigned int);
-        ibo.generateBuffer(1, ib, indexSize, *indices);
+        mesh.initindexbufferObject(ib, indexSize, *indices);
+        //ibo.generateBuffer(1, ib, indexSize, *indices);
 
         Shaders shaders("../Engine/src/res/shaders/Vertex.glsl", "../Engine/src/res/shaders/Pixel.glsl");
 

@@ -554,6 +554,7 @@
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\EntryPoint.h" />
     <ClInclude Include="src\Objects\Mesh.h" />
+    <ClInclude Include="src\Objects\Vertex.h" />
     <ClInclude Include="src\PCH\EGPCH.h" />
     <ClInclude Include="src\Renderer\Camera.h" />
     <ClInclude Include="src\Utilities\ErrorLogger.h" />

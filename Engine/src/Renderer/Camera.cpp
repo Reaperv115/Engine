@@ -11,7 +11,7 @@ namespace Engine
 		this->firstMouse = true;
 		this->updateCamera();
 		this->cameraPosition = glm::vec3(0.0f, 0.0f, 10.0f);
-		this->projMat = glm::perspectiveFov(glm::radians(45.0f), 640.0f, 480.0f, 0.1f, 1000.0f);
+		this->projMat = glm::perspectiveFov(glm::radians(45.0f), 1920.0f, 1080.0f, 0.1f, 1000.0f);
 		this->viewMat = glm::lookAt(cameraPosition, this->cameraFront, cameraUp);
 		this->worldMat = glm::mat4(1.0f);
 	}
