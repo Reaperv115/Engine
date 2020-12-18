@@ -43,10 +43,10 @@ namespace Engine
 
         float positions[] =
         {
-           -1.5f, -1.5f, // 0
-            1.5f, -1.5f, // 1
-            1.5f,  1.5f, // 2
-           -1.5f,  1.5f, // 3
+           -1.5f, -1.5f, 1.5f, // 0
+            1.5f, -1.5f, 1.5f, // 1
+            1.5f,  1.5f, 1.5f, // 2
+           -1.5f,  1.5f, 1.5f// 3
         };
 
         unsigned int indices[] =
@@ -56,7 +56,7 @@ namespace Engine
         };
 
         unsigned int buffer = 0;
-        float size = 4 * 2 * sizeof(float);
+        float size = 4 * 3 * sizeof(float);
         mesh.initvertexbufferObject(buffer, size, *positions);
         /*vao.createvertexBuffer(1, buffer, size, *positions);
         vao.enablevertexArray(0, 2, sizeof(float) * 2, 0);*/

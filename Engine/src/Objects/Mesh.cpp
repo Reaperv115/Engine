@@ -28,7 +28,7 @@ namespace Engine
 	void Mesh::initvertexbufferObject(unsigned int buffer, float size, float& data)
 	{
 		vbo.createvertexBuffer(1, buffer, size, data);
-		vbo.enablevertexArray(0, 2, sizeof(float) * 2, 0);
+		vbo.enablevertexArray(0, 2, sizeof(float) * 3, 0);
 	}
 
 	void Mesh::initindexbufferObject(unsigned int buffer, float size, unsigned int& data)
