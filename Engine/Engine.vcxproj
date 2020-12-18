@@ -554,6 +554,7 @@
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\EntryPoint.h" />
     <ClInclude Include="src\Objects\Mesh.h" />
+    <ClInclude Include="src\Objects\Model.h" />
     <ClInclude Include="src\Objects\Vertex.h" />
     <ClInclude Include="src\PCH\EGPCH.h" />
     <ClInclude Include="src\Renderer\Camera.h" />
@@ -565,6 +566,7 @@
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Objects\Mesh.cpp" />
+    <ClCompile Include="src\Objects\Model.cpp" />
     <ClCompile Include="src\PCH\EGPCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

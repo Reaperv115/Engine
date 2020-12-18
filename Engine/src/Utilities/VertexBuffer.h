@@ -1,4 +1,5 @@
 #pragma once
+#include "Objects\Vertex.h"
 
 namespace Engine
 {
@@ -7,7 +8,7 @@ namespace Engine
 	public:
 		VertexBuffer();
 	public:
-		void createvertexBuffer(int numBuffers, unsigned int& buffer, float size, float& data);
+		void createvertexBuffer(int numBuffers, unsigned int& buffer, float size, std::vector<glm::vec3>& data);
 		void enablevertexArray(int index, int size, float stride, const void* spotoffirstvertexAttribute);
 
 	public:

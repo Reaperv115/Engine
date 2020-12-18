@@ -1300,6 +1300,7 @@
       <Filter>src\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="src\Objects\Vertex.h" />
+    <ClInclude Include="src\Objects\Model.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -1326,5 +1327,6 @@
     <ClCompile Include="src\Utilities\VertexBuffer.cpp">
       <Filter>src\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="src\Objects\Model.cpp" />
   </ItemGroup>
 </Project>

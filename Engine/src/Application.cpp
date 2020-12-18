@@ -40,13 +40,12 @@ namespace Engine
         glfwSwapInterval(1);
 
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-
-        float positions[] =
+        std::vector<glm::vec3> positions =
         {
-           -1.5f, -1.5f, 1.5f, // 0
-            1.5f, -1.5f, 1.5f, // 1
-            1.5f,  1.5f, 1.5f, // 2
-           -1.5f,  1.5f, 1.5f// 3
+           glm::vec3(-1.5f, -1.5f, 1.5f), // 0
+            glm::vec3(1.5f, -1.5f, 1.5f), // 1
+            glm::vec3(1.5f,  1.5f, 1.5f), // 2
+           glm::vec3(-1.5f,  1.5f, 1.5f)// 3
         };
 
         unsigned int indices[] =
@@ -56,8 +55,8 @@ namespace Engine
         };
 
         unsigned int buffer = 0;
-        float size = 4 * 3 * sizeof(float);
-        mesh.initvertexbufferObject(buffer, size, *positions);
+        float size = 4 * 4 * sizeof(Vertex);
+        mesh.initvertexbufferObject(buffer, size, positions);
         /*vao.createvertexBuffer(1, buffer, size, *positions);
         vao.enablevertexArray(0, 2, sizeof(float) * 2, 0);*/
 

@@ -1,4 +1,5 @@
 #pragma once
+#include "Utilities\ErrorLogger.h"
 
 namespace Engine
 {
