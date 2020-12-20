@@ -48,22 +48,19 @@ namespace Engine
            glm::vec3(-1.5f,  1.5f, 1.5f)// 3
         };
 
-        unsigned int indices[] =
+        std::vector<unsigned int> indices =
         {
             0, 1, 2,
             2, 3, 0
         };
 
         unsigned int buffer = 0;
-        float size = 4 * 4 * sizeof(Vertex);
+        float size = positions.size() * sizeof(glm::vec3);
         mesh.initvertexbufferObject(buffer, size, positions);
-        /*vao.createvertexBuffer(1, buffer, size, *positions);
-        vao.enablevertexArray(0, 2, sizeof(float) * 2, 0);*/
 
         unsigned int ib = 0;
-        float indexSize = 6 * sizeof(unsigned int);
-        mesh.initindexbufferObject(ib, indexSize, *indices);
-        //ibo.generateBuffer(1, ib, indexSize, *indices);
+        float indexSize = indices.size() * sizeof(unsigned int);
+        mesh.initindexbufferObject(ib, indexSize, indices);
 
         Shaders shaders("../Engine/src/res/shaders/Vertex.glsl", "../Engine/src/res/shaders/Pixel.glsl");
 

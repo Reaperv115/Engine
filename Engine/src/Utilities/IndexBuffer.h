@@ -7,7 +7,7 @@ namespace Engine
 	public:
 		IndexBuffer();
 
-		void generateBuffer(int numBuffers, unsigned int bufferObject, float size, unsigned int& data);
+		void generateBuffer(int numBuffers, unsigned int bufferObject, float size, std::vector<unsigned int>& data);
 	};
 }
 

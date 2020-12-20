@@ -31,7 +31,7 @@ namespace Engine
 		vbo.enablevertexArray(0, 2, sizeof(float) * 3, 0);
 	}
 
-	void Mesh::initindexbufferObject(unsigned int buffer, float size, unsigned int& data)
+	void Mesh::initindexbufferObject(unsigned int buffer, float size, std::vector<unsigned int>& data)
 	{
 		ibo.generateBuffer(1, buffer, size, data);
 	}

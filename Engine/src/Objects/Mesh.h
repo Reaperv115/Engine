@@ -13,7 +13,7 @@ namespace Engine
 
 	public:
 		void initvertexbufferObject(unsigned int buffer, float size, std::vector<glm::vec3>& data);
-		void initindexbufferObject(unsigned int buffer, float size, unsigned int& data);
+		void initindexbufferObject(unsigned int buffer, float size, std::vector<unsigned int>& data);
 
 	public:
 		Vertex* vertexArray;
