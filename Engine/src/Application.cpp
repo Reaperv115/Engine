@@ -43,9 +43,6 @@ namespace Engine
 
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
-        glDisable(GL_CULL_FACE);
-        glFrontFace(GL_CCW);
-
         // creating red sqaure
         std::vector<glm::vec3> positions;
         positions.push_back(glm::vec3(-1.5f, -1.5f, 1.5f));
