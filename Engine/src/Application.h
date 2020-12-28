@@ -4,6 +4,7 @@
 #include "res/shaders/Shaders.h"
 #include "Renderer/Camera.h"
 #include "Objects\Mesh.h"
+#include "Objects\Model.h"
 
 namespace Engine
 {
@@ -23,8 +24,14 @@ namespace Engine
 
 	public:
 		ErrorLogger errorLogger;
-		Mesh mesh;
+		Mesh quad;
+		Mesh cube;
+		Model model;
 		Camera camera;
+
+	private:
+		std::vector<glm::vec3> cubePositions;
+		std::vector<unsigned int> cubeIndices;
 	};
 
 	Application* CreateApplication();

@@ -12,7 +12,7 @@ namespace Engine
 		Mesh();
 
 	public:
-		void initvertexbufferObject(unsigned int buffer, float size, std::vector<glm::vec3>& data);
+		void initvertexbufferObject(int index, unsigned int buffer, float size, std::vector<glm::vec3>& data);
 		void initindexbufferObject(unsigned int buffer, float size, std::vector<unsigned int>& data);
 
 	public:

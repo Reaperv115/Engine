@@ -25,10 +25,10 @@ namespace Engine
 
 	}
 
-	void Mesh::initvertexbufferObject(unsigned int buffer, float size, std::vector<glm::vec3>& data)
+	void Mesh::initvertexbufferObject(int index, unsigned int buffer, float size, std::vector<glm::vec3>& data)
 	{
 		vbo.createvertexBuffer(1, buffer, size, data);
-		vbo.enablevertexArray(0, 2, sizeof(float) * 3, 0);
+		vbo.enablevertexArray(index, 3, sizeof(glm::vec3), 0);
 	}
 
 	void Mesh::initindexbufferObject(unsigned int buffer, float size, std::vector<unsigned int>& data)

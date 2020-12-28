@@ -39,38 +39,66 @@ namespace Engine
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
 
+        
+
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-        std::vector<glm::vec3> positions =
-        {
-           glm::vec3(-1.5f, -1.5f, 1.5f), // 0
-            glm::vec3(1.5f, -1.5f, 1.5f), // 1
-            glm::vec3(1.5f,  1.5f, 1.5f), // 2
-           glm::vec3(-1.5f,  1.5f, 1.5f)// 3
-        };
 
-        std::vector<unsigned int> indices =
-        {
-            0, 1, 2,
-            2, 3, 0
-        };
+        glDisable(GL_CULL_FACE);
+        glFrontFace(GL_CCW);
 
-        unsigned int buffer = 0;
+        // creating red sqaure
+        std::vector<glm::vec3> positions;
+        positions.push_back(glm::vec3(-1.5f, -1.5f, 1.5f));
+        positions.push_back(glm::vec3(1.5f, -1.5f, 1.5f));
+        positions.push_back(glm::vec3(1.5f, 1.5f, 1.5f));
+        positions.push_back(glm::vec3(-1.5f, 1.5f, 1.5f));
+
+        std::vector<unsigned int> indices;
+        indices.push_back(0);
+        indices.push_back(1);
+        indices.push_back(2);
+        indices.push_back(2);
+        indices.push_back(3);
+        indices.push_back(0);
+        //
+
+        // filling vertex and index buffers
+        /*unsigned int buffer = 0;
         float size = positions.size() * sizeof(glm::vec3);
-        mesh.initvertexbufferObject(buffer, size, positions);
+        quad.initvertexbufferObject(0, buffer, size, positions);
 
         unsigned int ib = 0;
         float indexSize = indices.size() * sizeof(unsigned int);
-        mesh.initindexbufferObject(ib, indexSize, indices);
+        quad.initindexbufferObject(ib, indexSize, indices);*/
+        //
 
-        Shaders shaders("../Engine/src/res/shaders/Vertex.glsl", "../Engine/src/res/shaders/Pixel.glsl");
+        // loading quad shaders from file to use
+        Shaders quadshaders("../Engine/src/res/shaders/Vertex.glsl", "../Engine/src/res/shaders/Pixel.glsl");
+
+        model.loadModel("../Engine/src/Objects/models/test2.obj", cubePositions, cubeIndices);
+        unsigned int cubeBuffer = 1;
+        float cubevertexSize = cubePositions.size() * sizeof(glm::vec3);
+        cube.initvertexbufferObject(1, cubeBuffer, cubevertexSize, cubePositions);
+
+        unsigned int cubeindexBuffer = 1;
+        float cubeindexSize = cubeIndices.size() * sizeof(unsigned int);
+        cube.initindexbufferObject(cubeindexBuffer, cubeindexSize, cubeIndices);
+
+        Shaders cubeshaders("../Engine/src/res/shaders/CubeVertex.glsl", "../Engine/src/res/shaders/CubePixel.glsl");
 
         glm::mat4 wvp = camera.projMat * camera.viewMat * camera.worldMat;
 
-        shaders.setmatrixUniform("WVP", wvp);
-        shaders.Use();
+        /*quadshaders.setmatrixUniform("WVP", wvp);
+        quadshaders.Use();
         
-        shaders.setFloat("u_Color", 0.4f, 0.0f, 0.0f, 1.0f);
-        shaders.Use();
+        quadshaders.setFloat("u_Color", 0.4f, 0.0f, 0.0f, 1.0f);
+        quadshaders.Use();*/
+
+        cubeshaders.setmatrixUniform("WVP", wvp);
+        cubeshaders.Use();
+
+        cubeshaders.setFloat("u_Color", 0.0f, 0.0f, 1.0f, 1.0f);
+        cubeshaders.Use();
 
         float r = 0.0f;
 
@@ -96,9 +124,12 @@ namespace Engine
             
             wvp = camera.projMat * camera.viewMat * camera.worldMat;
 
-            shaders.setFloat("u_Color", r, 0.0f, 0.0f, 1.0f);
-            shaders.setmatrixUniform("WVP", wvp);
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+            /*quadshaders.setFloat("u_Color", r, 0.0f, 0.0f, 1.0f);
+            quadshaders.setmatrixUniform("WVP", wvp);*/
+            cubeshaders.setFloat("u_Color", 0.0f, 0.0f, 1.0f, 1.0f);
+            cubeshaders.setmatrixUniform("WVP", wvp);
+            //glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
+            glDrawElements(GL_TRIANGLE_STRIP, cubeIndices.size(), GL_UNSIGNED_INT, nullptr);
 
             
 
@@ -109,7 +140,8 @@ namespace Engine
             /* Poll for and process events */
             glfwPollEvents();
         }
-        glDeleteProgram(shaders.getID());
+        glDeleteProgram(quadshaders.getID());
+        //glDeleteProgram(cubeshaders.getID());
 
         glfwTerminate();
         return 1;
