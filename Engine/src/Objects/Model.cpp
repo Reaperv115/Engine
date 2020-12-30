@@ -3,7 +3,7 @@
 
 namespace Engine
 {
-	bool Model::loadModel(const std::string& filepath, std::vector<glm::vec3>& positions, std::vector<unsigned int>& indices)
+	void Model::loadModel(const std::string& filepath, MeshStructure& mesh)
 	{
 		std::stringstream ss;
 		std::ifstream fileStream(filepath);
@@ -20,11 +20,12 @@ namespace Engine
 				ss.str(lineheader);
 				ss >> prefix;
 
+
 				if (prefix == "v")
 				{
 					glm::vec3 vertex;
 					ss >> vertex.x >> vertex.y >> vertex.z;
-					positions.push_back(vertex);
+					mesh.positions.push_back(vertex);
 				}
 				if (prefix == "f")
 				{
@@ -43,24 +44,15 @@ namespace Engine
 				
 			}
 		}
-		indices.resize(tempIndices.size());
+		mesh.indices.resize(tempIndices.size());
 
 		for (int i = 0; i < tempIndices.size(); ++i)
 		{
-			indices[i] = tempIndices[i] - 1;
+			mesh.indices[i] = tempIndices[i] - 1;
 		}
 
-		std::cout << "num of verts: " << positions.size() << std::endl;
-		std::cout << "num of indices: " << indices.size() << std::endl;
-
-		if (positions.size() != 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		std::cout << "num of verts: " << mesh.positions.size() << std::endl;
+		std::cout << "num of indices: " << mesh.indices.size() << std::endl;
 
 	}
 }

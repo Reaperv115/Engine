@@ -3,7 +3,7 @@
 
 namespace Engine
 {
-	Mesh::Mesh(Vertex* vertexArr, unsigned int* indexArray, unsigned int numofVerts, unsigned int numofIndices)
+	/*Mesh::Mesh(Vertex* vertexArr, unsigned int* indexArray, unsigned int numofVerts, unsigned int numofIndices)
 	{
 		this->numofVertices = numofVerts;
 		this->numofIndices = numofIndices;
@@ -18,7 +18,7 @@ namespace Engine
 		{
 			this->indexArray[i] = indexArray[i];
 		}
-	}
+	}*/
 
 	Mesh::Mesh()
 	{
