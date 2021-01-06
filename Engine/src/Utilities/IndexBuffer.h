@@ -1,4 +1,5 @@
 #pragma once
+#include "Objects\Vertex.h"
 
 namespace Engine
 {

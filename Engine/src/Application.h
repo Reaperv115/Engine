@@ -25,7 +25,7 @@ namespace Engine
 	public:
 		ErrorLogger errorLogger;
 		Mesh quad;
-		Mesh cube;
+		Mesh cubeMesh;
 		Model model;
 		Camera camera;
 

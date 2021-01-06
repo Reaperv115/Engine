@@ -43,10 +43,7 @@ namespace Engine
 
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
-        glDisable(GL_CULL_FACE);
-        glFrontFace(GL_CCW);
-
-        // creating red sqaure
+#pragma region redsqaure
         std::vector<glm::vec3> positions;
         positions.push_back(glm::vec3(-1.5f, -1.5f, 1.5f));
         positions.push_back(glm::vec3(1.5f, -1.5f, 1.5f));
@@ -60,7 +57,7 @@ namespace Engine
         indices.push_back(2);
         indices.push_back(3);
         indices.push_back(0);
-        //
+#pragma endregion creating square
 
         // filling vertex and index buffers
         /*unsigned int buffer = 0;
@@ -72,17 +69,19 @@ namespace Engine
         quad.initindexbufferObject(ib, indexSize, indices);*/
         //
 
+        MeshStructure cube;
+
         // loading quad shaders from file to use
         Shaders quadshaders("../Engine/src/res/shaders/Vertex.glsl", "../Engine/src/res/shaders/Pixel.glsl");
 
-        model.loadModel("../Engine/src/Objects/models/test2.obj", cubePositions, cubeIndices);
+        model.loadModel("../Engine/src/Objects/models/test2.obj", cube);
         unsigned int cubeBuffer = 1;
-        float cubevertexSize = cubePositions.size() * sizeof(glm::vec3);
-        cube.initvertexbufferObject(1, cubeBuffer, cubevertexSize, cubePositions);
+        float cubevertexSize = cube.positions.size() * sizeof(glm::vec3);
+        cubeMesh.initvertexbufferObject(1, cubeBuffer, cubevertexSize, cube.positions);
 
         unsigned int cubeindexBuffer = 1;
-        float cubeindexSize = cubeIndices.size() * sizeof(unsigned int);
-        cube.initindexbufferObject(cubeindexBuffer, cubeindexSize, cubeIndices);
+        float cubeindexSize = cube.indices.size() * sizeof(unsigned int);
+        cubeMesh.initindexbufferObject(cubeindexBuffer, cubeindexSize, cube.indices);
 
         Shaders cubeshaders("../Engine/src/res/shaders/CubeVertex.glsl", "../Engine/src/res/shaders/CubePixel.glsl");
 
@@ -129,7 +128,7 @@ namespace Engine
             cubeshaders.setFloat("u_Color", 0.0f, 0.0f, 1.0f, 1.0f);
             cubeshaders.setmatrixUniform("WVP", wvp);
             //glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
-            glDrawElements(GL_TRIANGLE_STRIP, cubeIndices.size(), GL_UNSIGNED_INT, nullptr);
+            glDrawElements(GL_TRIANGLE_STRIP, cube.indices.size(), GL_UNSIGNED_INT, nullptr);
 
             
 

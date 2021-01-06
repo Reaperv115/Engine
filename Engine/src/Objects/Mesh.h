@@ -8,7 +8,7 @@ namespace Engine
 	class Mesh
 	{
 	public:
-		Mesh(Vertex* vertexArr, unsigned int* indexArray, unsigned int numofVerts, unsigned int numofIndices);
+		//Mesh(Vertex* vertexArr, unsigned int* indexArray, unsigned int numofVerts, unsigned int numofIndices);
 		Mesh();
 
 	public:
@@ -16,7 +16,7 @@ namespace Engine
 		void initindexbufferObject(unsigned int buffer, float size, std::vector<unsigned int>& data);
 
 	public:
-		Vertex* vertexArray;
+		//Vertex* vertexArray;
 		unsigned int* indexArray;
 		unsigned int numofVertices;
 		unsigned int numofIndices;
