@@ -3,7 +3,7 @@
 
 namespace Engine
 {
-	void ModelLoader::loadModel(const std::string& filepath, std::vector<Vertex>& model)
+	/*void ModelLoader::loadModel(const std::string& filepath, std::vector<Vertex>& model)
 	{
 		std::stringstream ss;
 		std::ifstream fileStream(filepath);
@@ -53,5 +53,5 @@ namespace Engine
 
 		std::cout << "num of verts: " << model.size() << std::endl;
 
-	}
+	}*/
 }
