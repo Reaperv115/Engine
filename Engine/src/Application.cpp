@@ -48,20 +48,31 @@ namespace Engine
            glm::vec3(-1.5f,  1.5f, 1.5f)// 3
         };
 
-        std::vector<Vertex> cube;
+        std::vector<unsigned int> indices =
+        {
+            0, 1, 2,
+            2, 3, 0
+        };
 
-        model.loadModel("../Engine/src/Objects/models/test2.obj", cube);
+        unsigned int buffer = 0;
+        float size = positions.size() * sizeof(glm::vec3);
+        mesh.initvertexbufferObject(buffer, size, positions);
 
-        cubeMesh.push_back(new Mesh(cube, cube.size(), model.modelIndices, model.modelIndices.size()));
+        unsigned int ib = 0;
+        float indexSize = indices.size() * sizeof(unsigned int);
+        mesh.initindexbufferObject(ib, indexSize, indices);
 
-        Shaders cubeshaders("../Engine/src/res/shaders/CubeVertex.glsl", "../Engine/src/res/shaders/CubePixel.glsl");
+        Shaders shaders("../Engine/src/res/shaders/Vertex.glsl", "../Engine/src/res/shaders/Pixel.glsl");
 
         glm::mat4 wvp = camera.projMat * camera.viewMat * camera.worldMat;
 
-        cubeshaders.setmatrixUniform("WVP", wvp);
-        cubeshaders.Use();
-
+        shaders.setmatrixUniform("WVP", wvp);
+        shaders.Use();
         
+        shaders.setFloat("u_Color", 0.4f, 0.0f, 0.0f, 1.0f);
+        shaders.Use();
+
+        float r = 0.0f;
 
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
@@ -86,15 +97,10 @@ namespace Engine
             
             // updating world, view, and projection matrices
             wvp = camera.projMat * camera.viewMat * camera.worldMat;
-            cubeshaders.setmatrixUniform("WVP", wvp);
 
-            cubeshaders.setFloat("u_Color", 0.0f, 1.0f, 0.0f, 0.0f);
-
-            // drawing
-            for (int i = 0; i < cubeMesh.size(); ++i)
-                glDrawElements(GL_TRIANGLE_STRIP, cubeMesh[i]->numofIndices, GL_UNSIGNED_INT, nullptr);
-                
-
+            shaders.setFloat("u_Color", r, 0.0f, 0.0f, 1.0f);
+            shaders.setmatrixUniform("WVP", wvp);
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
             
 
@@ -105,7 +111,7 @@ namespace Engine
             /* Poll for and process events */
             glfwPollEvents();
         }
-        glDeleteProgram(cubeshaders.getID());
+        glDeleteProgram(shaders.getID());
 
         glfwTerminate();
         return 1;

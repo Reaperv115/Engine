@@ -4,7 +4,6 @@
 #include "res/shaders/Shaders.h"
 #include "Renderer/Camera.h"
 #include "Objects\Mesh.h"
-#include "Objects\Model.h"
 
 namespace Engine
 {
