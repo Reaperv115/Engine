@@ -1,9 +1,9 @@
 #include "PCH/EGPCH.h"
-#include "Model.h"
+#include "ModelLoader.h"
 
 namespace Engine
 {
-	void Model::loadModel(const std::string& filepath, std::vector<Vertex>& data)
+	/*void ModelLoader::loadModel(const std::string& filepath, std::vector<Vertex>& model)
 	{
 		std::stringstream ss;
 		std::ifstream fileStream(filepath);
@@ -25,34 +25,33 @@ namespace Engine
 				{
 					glm::vec3 vertex;
 					ss >> vertex.x >> vertex.y >> vertex.z;
-					this->tempPositions.push_back(vertex);
+					tempVertices.push_back(vertex);
 				}
 				if (prefix == "f")
 				{
+					int counter = 0;
+
 					unsigned int index;
 					while (ss >> index)
 					{
-						this->modelIndices.push_back(index);
-
-						if (ss.peek() == ' ')
-						{
-							ss.ignore(1, ' ');
-						}
+							tempIndices.push_back(index);
+						
 					}
 					
 				}
 				
 			}
 		}
-		data.resize(tempPositions.size());
+		model.resize(tempVertices.size());
 
-		for (int i = 0; i < data.size(); ++i)
+		for (int i = 0; i < tempVertices.size(); ++i)
 		{
-			data[i].position = tempPositions[i];
+			model[i].indice = tempIndices[i] - 1;
+			model[i].position = tempVertices[i];
+			model[i].color = glm::vec3(1.0f, 1.0f, 1.0f);
 		}
 
-		std::cout << "num of verts: " << data.size() << std::endl;
-		std::cout << "num of indices: " << this->modelIndices.size() << std::endl;
+		std::cout << "num of verts: " << model.size() << std::endl;
 
-	}
+	}*/
 }

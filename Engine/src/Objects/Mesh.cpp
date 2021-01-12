@@ -1,23 +1,30 @@
 #include "PCH/EGPCH.h"
 #include "Mesh.h"
+#include <glad/glad.h>
 
 namespace Engine
 {
-	Mesh::Mesh(Vertex* vertexArr, unsigned int* indexArray, unsigned int numofVerts, unsigned int numofIndices)
+	Mesh::Mesh(std::vector<Vertex>& vertices, unsigned int numVerts, std::vector<unsigned int>& indices, unsigned int numIndices)
 	{
-		this->numofVertices = numofVerts;
-		this->numofIndices = numofIndices;
-		this->vertexArray = new Vertex[this->numofVertices];
-		for (size_t i = 0; i < numofVerts; ++i)
+		// resizing and filling model indices vector
+		this->modelIndices.resize(numIndices);
+		for (int i = 0; i < indices.size(); ++i)
 		{
-			this->vertexArray[i] = vertexArr[i];
+			this->modelIndices[i] = indices[i];
+			
+			++this->numofIndices;
 		}
 
-		this->indexArray = new unsigned int[this->numofIndices];
-		for (size_t i = 0; i < numofIndices; ++i)
+		// resizing and filling model vertices vector
+		this->modelVertices.resize(numVerts);
+		for (int i = 0; i < numVerts; ++i)
 		{
-			this->indexArray[i] = indexArray[i];
+			this->modelVertices[i] = vertices[this->modelIndices[i] - 1].position;
 		}
+
+		// creating vertex and index buffer objects
+		initvertexbufferObject(this->vbo, this->modelVertices.size() * sizeof(glm::vec3), this->modelVertices);
+		initindexbufferObject(this->ibo, this->modelIndices.size() * sizeof(unsigned int), this->modelIndices);
 	}
 
 	Mesh::Mesh()
@@ -25,14 +32,20 @@ namespace Engine
 
 	}
 
-	void Mesh::initvertexbufferObject(int index, unsigned int buffer, float size, std::vector<glm::vec3>& data)
+	void Mesh::initvertexbufferObject(unsigned int buffer, float size, std::vector<glm::vec3>& data)
 	{
-		vbo.createvertexBuffer(1, buffer, size, data);
-		vbo.enablevertexArray(index, 3, sizeof(glm::vec3), 0);
+		glGenBuffers(1, &buffer);
+		glBindBuffer(GL_ARRAY_BUFFER, buffer);
+		glBufferData(GL_ARRAY_BUFFER, size, &data[0], GL_STATIC_DRAW);
+
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), 0);
+		glEnableVertexAttribArray(1);
 	}
 
 	void Mesh::initindexbufferObject(unsigned int buffer, float size, std::vector<unsigned int>& data)
 	{
-		ibo.generateBuffer(1, buffer, size, data);
+		glGenBuffers(1, &buffer);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, &data[0], GL_STATIC_DRAW);
 	}
 }
