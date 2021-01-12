@@ -39,9 +39,14 @@ namespace Engine
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
 
-        
-
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+        std::vector<glm::vec3> positions =
+        {
+           glm::vec3(-1.5f, -1.5f, 1.5f), // 0
+            glm::vec3(1.5f, -1.5f, 1.5f), // 1
+            glm::vec3(1.5f,  1.5f, 1.5f), // 2
+           glm::vec3(-1.5f,  1.5f, 1.5f)// 3
+        };
 
         std::vector<Vertex> cube;
 

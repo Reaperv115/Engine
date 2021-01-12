@@ -26,11 +26,8 @@ namespace Engine
 		ErrorLogger errorLogger;
 		std::vector<Mesh*> cubeMesh;
 		Model model;
+		Mesh mesh;
 		Camera camera;
-
-	private:
-		std::vector<glm::vec3> cubePositions;
-		std::vector<unsigned int> cubeIndices;
 	};
 
 	Application* CreateApplication();

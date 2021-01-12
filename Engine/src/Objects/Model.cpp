@@ -5,20 +5,17 @@ namespace Engine
 {
 	void Model::loadModel(const std::string& filepath, std::vector<Vertex>& data)
 	{
-		std::stringstream ss;
-		std::ifstream fileStream(filepath);
-		std::string lineheader;
-		std::string prefix;
-
-		if (!fileStream.is_open())
-			errorLogger.Log((std::string)"Error: couldn't find file");
+		FILE* file = fopen(filepath.c_str(), "r");
+		if (!file)
+			errorLogger.Log(std::string("failed to open model file"));
 		else
 		{
-			while (std::getline(fileStream, lineheader))
+			while (1)
 			{
-				ss.clear();
-				ss.str(lineheader);
-				ss >> prefix;
+				char lineHeader[128];
+				int res = fscanf(file, lineHeader);
+				if (res == EOF)
+					break;
 
 
 				if (prefix == "v")
@@ -41,7 +38,6 @@ namespace Engine
 					}
 					
 				}
-				
 			}
 		}
 		data.resize(tempPositions.size());

@@ -1,5 +1,4 @@
 #pragma once
-#include "glm.hpp"
 #include "Utilities\ErrorLogger.h"
 #include "Objects\Vertex.h"
 
