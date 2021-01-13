@@ -20,6 +20,7 @@ namespace Engine
 				ss.str(line);
 				ss >> prefix;
 
+
 				if (prefix == "v")
 				{
 					glm::vec3 vertex;

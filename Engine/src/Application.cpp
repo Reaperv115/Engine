@@ -41,12 +41,15 @@ namespace Engine
 
         int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
+        // creating and loading cube model
         std::vector<Vertex> cube;
         model.loadModel("../Engine/src/objects/models/test.obj", cube);
         cubeMesh.push_back(new Mesh(cube, cube.size(), model.modelIndices, model.modelIndices.size()));
 
+        // loading and creating shaders
         Shaders cubeshaders("../Engine/src/res/shaders/CubeVertex.glsl", "../Engine/src/res/shaders/CubePixel.glsl");
 
+        // creating the matrix used in the vertex shader
         glm::mat4 wvp = camera.projMat * camera.viewMat * camera.worldMat;
 
         /* Loop until the user closes the window */
@@ -70,11 +73,13 @@ namespace Engine
             // updating world, view, and projection matrices
             wvp = camera.projMat * camera.viewMat * camera.worldMat;
 
+            // updating constant buffers
             cubeshaders.setmatrixUniform("WVP", wvp);
             cubeshaders.Use();
             cubeshaders.setFloat("u_Color", 0.0f, 1.0f, 0.0f, 1.0f);
             cubeshaders.Use();
 
+            // drawing
             for (int i = 0; i < cubeMesh.size(); ++i)
                 glDrawElements(GL_TRIANGLE_STRIP, cubeMesh[i]->numofIndices, GL_UNSIGNED_INT, nullptr);
 

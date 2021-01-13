@@ -26,7 +26,6 @@ namespace Engine
 		ErrorLogger errorLogger;
 		std::vector<Mesh*> cubeMesh;
 		Model model;
-		Mesh mesh;
 		Camera camera;
 	};
 
