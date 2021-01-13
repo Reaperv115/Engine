@@ -19,7 +19,7 @@ namespace Engine
 		this->modelVertices.resize(numVerts);
 		for (int i = 0; i < numVerts; ++i)
 		{
-			this->modelVertices[i] = vertices[this->modelIndices[i] - 1].position;
+			this->modelVertices[i] = vertices[i].position;
 		}
 
 		// creating vertex and index buffer objects

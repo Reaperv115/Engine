@@ -8,5 +8,5 @@ uniform mat4 WVP;
 void main()
 {
 
-	gl_Position = WVP * vec4(v_position, 1.0);
+	gl_Position = WVP * vec4(position, 1.0);
 }
