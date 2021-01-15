@@ -11,7 +11,6 @@ namespace Engine
 		for (int i = 0; i < indices.size(); ++i)
 		{
 			this->modelIndices[i] = indices[i];
-			
 			++this->numofIndices;
 		}
 
@@ -38,7 +37,10 @@ namespace Engine
 		glBindBuffer(GL_ARRAY_BUFFER, buffer);
 		glBufferData(GL_ARRAY_BUFFER, size, &data[0], GL_STATIC_DRAW);
 
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), 0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)offsetof(Vertex, position));
+		glEnableVertexAttribArray(0);
+
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)offsetof(Vertex, color));
 		glEnableVertexAttribArray(1);
 	}
 

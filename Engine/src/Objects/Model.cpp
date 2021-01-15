@@ -48,6 +48,7 @@ namespace Engine
 		for (int i = 0; i < data.size(); ++i)
 		{
 			data[i].position = tempPositions[i];
+			data[i].color = glm::vec3(1.0f, 0.0f, 0.0f);
 		}
 
 		std::cout << "num of verts: " << data.size() << std::endl;

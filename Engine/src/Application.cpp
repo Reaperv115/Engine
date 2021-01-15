@@ -69,6 +69,7 @@ namespace Engine
 
             glFrontFace(GL_CCW);
             glEnable(GL_DEPTH_TEST);
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
             
             // updating world, view, and projection matrices
             wvp = camera.projMat * camera.viewMat * camera.worldMat;
@@ -76,8 +77,8 @@ namespace Engine
             // updating constant buffers
             cubeshaders.setmatrixUniform("WVP", wvp);
             cubeshaders.Use();
-            cubeshaders.setFloat("u_Color", 0.0f, 1.0f, 0.0f, 1.0f);
-            cubeshaders.Use();
+            /*cubeshaders.setFloat("u_Color", 0.0f, 1.0f, 0.0f, 1.0f);
+            cubeshaders.Use();*/
 
             // drawing
             for (int i = 0; i < cubeMesh.size(); ++i)
